@@ -1,0 +1,21 @@
+
+.container{
+    width: 100vh;
+    height: 100vh;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.leftslide{
+    position: fixed;
+    left: 10%;
+    top:50%;
+}
+
+.rightslide{
+    position: fixed;
+    right: 10%;
+    top:50%;
+}
