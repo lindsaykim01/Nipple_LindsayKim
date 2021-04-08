@@ -1,37 +1,152 @@
-var Airtable = require('airtable');
-var base = new Airtable({apiKey: 'keyEcb9lwZCbNBfCd'}).base('applJsXPWzYp0DptB');
 
-console.log(base.activeCollaborators);
+var Airtable = require("airtable");
 
-let nipplelist = document.getElementById('nipple-list');
+var base = new Airtable({ apiKey: "keyEcb9lwZCbNBfCd" }).base(
+  "appCHRkg9CCWFOyvR"
+);
 
-base('Table 1').select({
-   maxRecords: 102,
-   view: "All"
-}).eachPage(function page(records, fetchNextPage) {
-    // This function (`page`) will get called for each page of records.
-    records.forEach(function(record) {
-      if (nipplelist) {
-         // define and create elements
-         let el = document.createElement('li');
-         let p = document.createElement('p');
-         let h1 = document.createElement('h1');
-         let img = document.createElement('img');
-         let nip = document.createElement('div');
-         // Set innerHTML of the elements
-         h1.innerHTML = record.get('Name');
-         p.innerHTML = record.get('Notes');
-         img.src = record.fields.Sprites[2].url;
-         nip.classList = 'nip';
-         // append them to the list
-         pokelist.append(el);
-         el.append(img, h1, p, nip);
-         el.classList.add('animate');
-      }
-    });
+base("ALL Images").select({}).eachPage( getnips, shownip);
 
-    fetchNextPage();
+const nips = [];
 
-}, function done(err) {
-    if (err) { console.error(err); return; }
-});
+var nipcounter = 0;
+
+// callback function that receives our data
+function getnips(records, fetchNextPage) {
+  nips.push(...records);
+  fetchNextPage();
+}
+
+
+function shownip() {
+  const nipplelist = document.getElementById("nipplelist");
+
+  const onepagenips = [];
+  if(nipcounter > nips.length-6){
+    nipcounter = 0;
+  }
+  var num = nipcounter;
+  for(i=0; i<6 ; i++){
+    console.log(nips[num+i].fields.Text);
+    onepagenips.push(nips[num+i]);
+  }
+  nipcounter += 6;
+
+  console.log(onepagenips);
+  onepagenips.forEach((nip) => {
+    // div.innerText = nip.fields.Text;
+    var imgurl =  nip.fields.Images[0].url;
+    const img = document.createElement("img");
+    img.src= imgurl;
+    img.id = "nipimg"
+    img.style.borderRadius = "50%";
+    img.style.height = `20vw`;
+    img.style.width = '20vw';
+    img.style.margintop = "-10%";
+    img.style.marginLeft="2.5%";
+    img.style.marginRight="2.5%";
+    nipplelist.appendChild(img);
+  });
+}
+
+
+const leftnips = document.getElementById("leftslide");
+
+const rightnips = document.getElementById("rightslide");
+
+rightnips.addEventListener("click", clearright);
+leftnips.addEventListener("click", clearleft);
+
+
+
+function clearright(){
+  const nipplelist = document.querySelector('#nipplelist');
+
+  while (nipplelist.firstChild) {
+    nipplelist.removeChild(nipplelist.firstChild);
+  }
+  
+  // for(i=0; i<6; i++){
+  //   nipplelist.removeChild(nipplelist.childNodes[1]);
+  // }
+  rightnip();
+}
+
+function clearleft(){
+  const nipplelist = document.querySelector('#nipplelist');
+
+  while (nipplelist.firstChild) {
+    nipplelist.removeChild(nipplelist.firstChild);
+  }
+  // for(i=0; i<6; i++){
+  //   nipplelist.removeChild(nipplelist.childNodes[1]);
+  // }
+  leftnip();
+}
+
+function rightnip() {
+
+  const nipplelist = document.getElementById("nipplelist");
+  
+  for(i=0; i<6; i++){
+    nipplelist.removeChild(nipplelist.childNodes[1]);
+  }
+
+  const onepagenips = [];
+  if(nipcounter > nips.length-6){
+    nipcounter = 0;
+  }
+  var num = nipcounter;
+  for(i=0; i<6 ; i++){
+    console.log(nips[num+i].fields.Text);
+    onepagenips.push(nips[num+i]);
+  }
+  nipcounter += 6;
+
+  console.log(onepagenips);
+  onepagenips.forEach((nip) => {
+    // div.innerText = nip.fields.Text;
+    var imgurl =  nip.fields.Images[0].url;
+    const img = document.createElement("img");
+    img.src= imgurl;
+    img.id = "nipimg"
+    img.style.borderRadius = "50%";
+    img.style.height = `20vw`;
+    img.style.width = '20vw';
+    img.style.margintop = "-10%";
+    img.style.marginLeft="2.5%";
+    img.style.marginRight="2.5%";
+    nipplelist.appendChild(img);
+  });
+}
+
+function leftnip() {
+  const nipplelist = document.getElementById("nipplelist");
+
+  const onepagenips = [];
+  if(nipcounter > nips.length-6){
+    nipcounter = 0;
+  }
+  var num = nipcounter;
+  for(i=6; i>0 ; i--){
+    console.log(nips[num-i].fields.Text);
+    onepagenips.push(nips[num-i]);
+  }
+  nipcounter -= 6;
+
+  console.log(onepagenips);
+  onepagenips.forEach((nip) => {
+    // div.innerText = nip.fields.Text;
+    var imgurl =  nip.fields.Images[0].url;
+    const img = document.createElement("img");
+    img.src= imgurl;
+    img.id = "nipimg"
+    img.style.borderRadius = "50%";
+    img.style.height = `20vw`;
+    img.style.width = '20vw';
+    img.style.margintop = "-10%";
+    img.style.marginLeft="2.5%";
+    img.style.marginRight="2.5%";
+    nipplelist.appendChild(img);
+  });
+}
