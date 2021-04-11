@@ -5,22 +5,20 @@ var base = new Airtable({ apiKey: "keyEcb9lwZCbNBfCd" }).base(
   "appCHRkg9CCWFOyvR"
 );
 
-base("ALL Images").select({}).eachPage( getnips, shownip);
-
 const nips = [];
-
 var nipcounter = 0;
+var nipsrc;
+
+base("ALL Images").select({}).eachPage( getnips);
+
+
+
+
 
 // callback function that receives our data
-function getnips(records, fetchNextPage) {
+function getnips(records) {
   nips.push(...records);
-  fetchNextPage();
-}
-
-
-function shownip() {
   const nipplelist = document.getElementById("nipplelist");
-
   const onepagenips = [];
   if(nipcounter > nips.length-6){
     nipcounter = 0;
@@ -36,6 +34,7 @@ function shownip() {
   onepagenips.forEach((nip) => {
     // div.innerText = nip.fields.Text;
     var imgurl =  nip.fields.Images[0].url;
+    nipsrc = imgurl;
     const img = document.createElement("img");
     img.src= imgurl;
     img.id = "nipimg"
@@ -45,8 +44,14 @@ function shownip() {
     img.style.margintop = "-10%";
     img.style.marginLeft="2.5%";
     img.style.marginRight="2.5%";
+    img.addEventListener("click",comp(imgurl));
     nipplelist.appendChild(img);
-  });
+  });  
+}
+
+
+function comp(imgurl){
+  console.log(imgurl);
 }
 
 
@@ -62,25 +67,18 @@ leftnips.addEventListener("click", clearleft);
 function clearright(){
   const nipplelist = document.querySelector('#nipplelist');
 
-  while (nipplelist.firstChild) {
-    nipplelist.removeChild(nipplelist.firstChild);
+  for(i=0; i<6; i++){
+    nipplelist.removeChild(nipplelist.children[0]);
   }
-  
-  // for(i=0; i<6; i++){
-  //   nipplelist.removeChild(nipplelist.childNodes[1]);
-  // }
   rightnip();
 }
 
 function clearleft(){
   const nipplelist = document.querySelector('#nipplelist');
 
-  while (nipplelist.firstChild) {
-    nipplelist.removeChild(nipplelist.firstChild);
+  for(i=0; i<6; i++){
+    nipplelist.removeChild(nipplelist.children[0]);
   }
-  // for(i=0; i<6; i++){
-  //   nipplelist.removeChild(nipplelist.childNodes[1]);
-  // }
   leftnip();
 }
 
@@ -88,9 +86,6 @@ function rightnip() {
 
   const nipplelist = document.getElementById("nipplelist");
   
-  for(i=0; i<6; i++){
-    nipplelist.removeChild(nipplelist.childNodes[1]);
-  }
 
   const onepagenips = [];
   if(nipcounter > nips.length-6){
@@ -124,11 +119,11 @@ function leftnip() {
   const nipplelist = document.getElementById("nipplelist");
 
   const onepagenips = [];
-  if(nipcounter > nips.length-6){
-    nipcounter = 0;
+  if(nipcounter < 6){
+    nipcounter = 101;
   }
   var num = nipcounter;
-  for(i=6; i>0 ; i--){
+  for(i=0; i<6 ; i++){
     console.log(nips[num-i].fields.Text);
     onepagenips.push(nips[num-i]);
   }
@@ -150,3 +145,9 @@ function leftnip() {
     nipplelist.appendChild(img);
   });
 }
+
+
+
+
+
+
