@@ -44,3 +44,37 @@ body{
     height: 55vw;
 }
 
+#backbutton{
+    display: none;
+    position: fixed;
+    z-index: 2;
+    top: 90vh;
+    left: 15vw;
+    text-align: center;
+    font-size: 5vh;
+    color: white
+}
+
+
+@media (max-width : 1366px){
+    #nipplelist {
+        display: flex;
+        flex-flow: column wrap;
+        justify-content: center;
+        align-items: center;
+        width: 55vw;
+        height: 75vw;
+    }
+
+    #maintext{
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        position: fixed;
+        left: 10vw;
+        top: 2.5vh;
+        font-size: 5vh;
+        z-index: 1;
+        color: white;
+    
+    }
+       
+}
