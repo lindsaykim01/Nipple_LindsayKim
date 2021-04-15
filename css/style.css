@@ -7,10 +7,11 @@ body{
 #maintext{
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     position: fixed;
-    left: 30vh;
-    top: 30vh;
+    top: 45%;
     font-size: 10vh;
-    z-index: 1;
+    text-align: center;
+    width: 100%;
+    z-index: 0;
     color: white;
 
 }
@@ -28,12 +29,14 @@ body{
     position: fixed;
     left: 10%;
     top:50%;
+    z-index: 1;
 }
 
 #rightslide{
     position: fixed;
     right: 10%;
     top:50%;
+    z-index: 1;
 }
 #nipplelist {
     display: flex;
@@ -46,10 +49,11 @@ body{
 
 #backbutton{
     display: none;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     position: fixed;
     z-index: 2;
     top: 90vh;
-    left: 15vw;
+    left: 10vw;
     text-align: center;
     font-size: 5vh;
     color: white
@@ -69,7 +73,6 @@ body{
     #maintext{
         font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
         position: fixed;
-        left: 10vw;
         top: 2.5vh;
         font-size: 5vh;
         z-index: 1;
@@ -77,4 +80,22 @@ body{
     
     }
        
+}
+
+#about{
+    font-size: 5vh;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    position: fixed;
+    z-index: 2;
+    right: 10%;
+    top: 90%;
+
+a:link {
+    color: none
+  }
+  a:visited {
+    color: none
+  }
+  
+
 }

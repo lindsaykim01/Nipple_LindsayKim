@@ -13,18 +13,19 @@ base("ALL Images").select({}).eachPage( getnips);
 
 
 
-
-
 // callback function that receives our data
 function getnips(records) {
   nips.push(...records);
 
   const nipplelist = document.getElementById("nipplelist");
+
   const onepagenips = [];
+
   if(nipcounter > nips.length-6){
     nipcounter = 0;
   }
   var num = nipcounter;
+
   for(i=0; i<6 ; i++){
     console.log(nips[num+i].fields.Text);
     onepagenips.push(nips[num+i]);

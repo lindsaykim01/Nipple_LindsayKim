@@ -1,0 +1,23 @@
+body{
+    background: #E98686;
+}
+.title{
+    text-align: center;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color:white;
+    position: fixed;
+    top: 45%;
+    font-size: 4vh;
+    width: 100%;
+}
+
+#back{
+
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    position: fixed;
+    top: 90vh;
+    left: 10vw;
+    text-align: center;
+    font-size: 5vh;
+    color: white
+}
